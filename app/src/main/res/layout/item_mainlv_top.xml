@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/grey_f3f3f3"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow2"
+        android:padding="10dp">
+        <TextView
+            android:id="@+id/item_mainlv_top_tv_riqi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="@string/_2020_12"
+            android:layout_alignParentStart="true"
+            tools:ignore="RelativeOverlap"/>
+
+        <ImageView
+            android:id="@+id/item_mainlv_top_iv_hide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/ih_show"
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/隐藏" />
+        <TextView
+            android:id="@+id/item_mainlv_top_tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/本月支出"
+            android:layout_below="@id/item_mainlv_top_tv_riqi"/>
+        <TextView
+            android:id="@+id/item_mainlv_top_tv_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_25"
+            android:layout_below="@id/item_mainlv_top_tv1"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/item_mainlv_top_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_mainlv_top_tv1"
+            android:layout_toLeftOf="@id/item_mainlv_top_tv3"
+            android:text="@string/本月收入"
+            android:layout_marginStart="80dp"
+            android:layout_marginEnd="80dp"
+            android:layout_toEndOf="@id/item_mainlv_top_tv1"
+            android:layout_below="@id/item_mainlv_top_tv_riqi" />
+        <TextView
+            android:id="@+id/item_mainlv_top_tv_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_25"
+            android:layout_below="@id/item_mainlv_top_tv2"
+            android:layout_toRightOf="@id/item_mainlv_top_tv_out"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:layout_toEndOf="@id/item_mainlv_top_tv_out" />
+
+        <TextView
+            android:id="@+id/item_mainlv_top_tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/item_mainlv_top_tv2"
+            android:text="@string/本月预算"
+            android:layout_toEndOf="@id/item_mainlv_top_tv2"
+            android:layout_below="@id/item_mainlv_top_tv_riqi"/>
+        <TextView
+            android:id="@+id/item_mainlv_top_tv_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/_25"
+            android:layout_below="@id/item_mainlv_top_tv3"
+            android:layout_toRightOf="@id/item_mainlv_top_tv_in"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"
+            android:layout_toEndOf="@id/item_mainlv_top_tv_in" />
+        <TextView
+            android:id="@+id/item_mainlv_top_tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@mipmap/search"
+            android:layout_toRightOf="@id/item_mainlv_top_tv_riqi"
+            android:layout_centerHorizontal="true"
+            android:text="@string/图表分析"
+            android:textColor="@color/black"
+            android:drawablePadding="10dp" />
+
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/item_mainlv_top_tv_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/_0_0"
+        android:textStyle="bold"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/grey_959494"/>
+
+</LinearLayout>

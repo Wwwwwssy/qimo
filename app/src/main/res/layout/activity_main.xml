@@ -10,7 +10,7 @@
         android:id="@+id/main_top_layout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@color/pink">
+        android:background="@color/yellow">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -30,8 +30,7 @@
             android:layout_alignParentRight="true"
             android:padding="10dp"
             android:layout_alignParentEnd="true"
-            android:contentDescription="@string/search"
-            android:onClick="onClick"/>
+            android:contentDescription="@string/search" />
 
     </RelativeLayout>
 
@@ -40,20 +39,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/main_top_layout"
-        android:padding="10dp"
         android:divider="@null"
         android:dividerHeight="6dp"
         android:background="@color/grey_f3f3f3"/>
+
     <ImageButton
-        android:id="@+id/main_btn_more"
+        android:id="@+id/main_btn_my"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/my"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="15dp"
-        android:onClick="onClick"
-        android:background="@color/pink"
+        android:background="@color/yellow"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/设置" />
     <ImageButton
@@ -61,12 +59,11 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/jizhang"
-        android:layout_toLeftOf="@id/main_btn_more"
-        android:layout_alignBottom="@id/main_btn_more"
+        android:layout_toLeftOf="@id/main_btn_my"
+        android:layout_alignBottom="@id/main_btn_my"
         android:layout_marginLeft="15dp"
-        android:onClick="onClick"
-        android:background="@color/pink"
-        android:layout_toStartOf="@id/main_btn_more"
+        android:background="@color/yellow"
+        android:layout_toStartOf="@id/main_btn_my"
         android:layout_marginStart="15dp"
         android:contentDescription="@string/jizhang" />
     <ImageButton
@@ -75,10 +72,9 @@
         android:layout_height="50dp"
         android:src="@drawable/mingxi"
         android:layout_toLeftOf="@id/main_btn_edit"
-        android:layout_alignBottom="@id/main_btn_more"
+        android:layout_alignBottom="@id/main_btn_my"
         android:layout_marginLeft="15dp"
-        android:onClick="onClick"
-        android:background="@color/pink"
+        android:background="@color/yellow"
         android:layout_toStartOf="@id/main_btn_edit"
         android:layout_marginStart="15dp"
         android:contentDescription="@string/mingixi" />
