@@ -1,12 +1,17 @@
 package cn.edu.qimo;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -14,6 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,6 +28,8 @@ import java.util.List;
 import cn.edu.qimo.db.ConfirmBean;
 import cn.edu.qimo.db.DBManager;
 import cn.edu.qimo.jizhangfg.JizhangActivity;
+import cn.edu.qimo.my.MyActivity;
+import cn.edu.qimo.search.SearchActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private final String TAG = "JizhangActivity";
@@ -35,20 +43,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     View headerView;
     TextView topOutTv,topInTv,topbudgetTv,topConTv;
     ImageView topShowIv;
-    //
+    //预算
     SharedPreferences preferences;
+    boolean isShow = true;//默认可以显示金额
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Time();
         initView();
+        preferences = getSharedPreferences("budget", Context.MODE_PRIVATE);//初始化preferences，设置为私有化
         mDatas = new ArrayList<>();
         //设置适配器，加载每一行数据到ListView
         adapter = new MainJizhangAdapter(this,mDatas);
         todayLv.setAdapter(adapter);
         //添加listview的头布局
         addLVHeaderView();
+        //长按删除
+        setLVLongClickListener();
 
     }
     // 当activity获取焦点时，会调用的方法
@@ -71,19 +83,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         topInTv.setText("￥"+incomeOneMonth);
         topOutTv.setText("￥"+outcomeOneMonth);
 
-        //设置显示运算剩余
+        //设置显示预算剩余
         float bmoney = preferences.getFloat("bmoney", 0);//预算
         if (bmoney == 0) {
             topbudgetTv.setText("￥ 0");
         }else{
-            float syMoney = bmoney-outcomeOneMonth;
-            topbudgetTv.setText("￥"+syMoney);
+            float symoney = bmoney-outcomeOneMonth;
+            topbudgetTv.setText("￥"+symoney);
         }
     }
 
     // 加载数据库数据
     private void loadDBData() {
-        List<ConfirmBean> list = DBManager.getListOneDayFromComfirmtb(year, month, day);
+        List<ConfirmBean> list = DBManager.getListOneDayFromConfirmtb(year, month, day);
         mDatas.clear();
         mDatas.addAll(list);
         adapter.notifyDataSetChanged();
@@ -116,7 +128,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editBtn.setOnClickListener(this);
         moreBtn.setOnClickListener(this);
         searchIv.setOnClickListener(this);
-//        setLVLongClickListener();
     }
     private void Time() {
         Calendar calendar = Calendar.getInstance();
@@ -137,25 +148,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent2 = new Intent(this, JizhangActivity.class);  //记账界面
                 startActivity(intent2);
                 break;
+            case R.id.main_btn_my:
+                Log.d(TAG,"个人中心");
+                Intent intent3 = new Intent(this, MyActivity.class);  //个人主页
+                startActivity(intent3);
+                break;
+            case R.id.main_iv_search:
+                Intent intent4 = new Intent(this, SearchActivity.class);  //搜索界面
+                startActivity(intent4);
+                break;
             case R.id.item_mainlv_top_tv_budget:
-
+                showBudget();//设置预算
                 break;
             case R.id.item_mainlv_top_iv_hide:
                 toggleShow();//隐藏或者显示
                 break;
-//            case R.id.main_btn_my:
-//                Intent intent4 = new Intent(this, MyActivity.class);  //个人主页
-//                startActivity(intent4);
-//                break;
-//            case R.id.main_btn_more:
-//                MoreDialog moreDialog = new MoreDialog(this);//更多页面
-//                moreDialog.show();
-//                moreDialog.setDialogSize();
-//                break;
-//            case R.id.main_iv_search:
-//                Intent intent3 = new Intent(this, SearchActivity.class);  //搜索界面
-//                startActivity(intent3);
-//                break;
+
 //            if (v == headerView) {
 //                //头布局被点击了
 //                Intent intent5 = new Intent();
@@ -164,25 +172,77 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
         }
     }
+    //显示设置预算对话框
+    private void showBudget() {
+        Budget budget = new Budget(this);
+        budget.show();
+        budget.setOnEnsureListener(new Budget.OnEnsureListener() {
+            @Override
+            public void onEnsure(float money) {
+                //将预算金额写入到共享参数当中，进行存储
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putFloat("bmoney",money);
+                editor.commit();
+                //计算剩余金额
+                float outcomeOneMonth = DBManager.getSumMoneyOneMonth(year, month, 0);
+                float symoney = money-outcomeOneMonth;//预算剩余
+                topbudgetTv.setText("￥"+symoney);
+            }
+        });
+    }
 
     //隐藏或者显示金额
-    boolean isShow = true;
     private void toggleShow() {
         if (isShow) {   //明文====》密文
-            PasswordTransformationMethod passwordMethod = PasswordTransformationMethod.getInstance();
-            topInTv.setTransformationMethod(passwordMethod);   //设置隐藏
-            topOutTv.setTransformationMethod(passwordMethod);   //设置隐藏
-            topbudgetTv.setTransformationMethod(passwordMethod);   //设置隐藏
-            topShowIv.setImageResource(R.mipmap.ih_hide);
+            PasswordTransformationMethod passwordMethod = PasswordTransformationMethod.getInstance();//得到密文对象
+            topInTv.setTransformationMethod(passwordMethod);//收入设置隐藏
+            topOutTv.setTransformationMethod(passwordMethod);//支出设置隐藏
+            topbudgetTv.setTransformationMethod(passwordMethod);//预算设置隐藏
+            topShowIv.setImageResource(R.mipmap.ih_hide);//修改图标样式
             isShow = false;   //设置标志位为隐藏状态
         }else{  //密文---》明文
-            HideReturnsTransformationMethod hideMethod = HideReturnsTransformationMethod.getInstance();
-            topInTv.setTransformationMethod(hideMethod);   //设置隐藏
-            topOutTv.setTransformationMethod(hideMethod);   //设置隐藏
-            topbudgetTv.setTransformationMethod(hideMethod);   //设置隐藏
+            HideReturnsTransformationMethod hideMethod = HideReturnsTransformationMethod.getInstance();//隐藏返回
+            topInTv.setTransformationMethod(hideMethod);
+            topOutTv.setTransformationMethod(hideMethod);
+            topbudgetTv.setTransformationMethod(hideMethod);
             topShowIv.setImageResource(R.mipmap.ih_show);
             isShow = true;   //设置标志位为隐藏状态
         }
+    }
+
+    //显示删除页面对话框
+    private void setLVLongClickListener() {
+        todayLv.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) {  //点击了头布局
+                    return false;
+                }
+                int pos = position-1;
+                ConfirmBean clickBean = mDatas.get(pos);  //获取正在被点击的这条信息
+
+                //弹出提示用户是否删除的对话框
+                showDeleteItemDialog(clickBean);
+                return false;
+            }
+        });
+    }
+    private void showDeleteItemDialog(final  ConfirmBean clickBean) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示信息").setMessage("是否删除这条记录？")
+                .setNegativeButton("取消",null)
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int click_id = clickBean.getId();
+                        //执行删除的操作
+                        DBManager.deleteItemFromConfirmtbById(click_id);
+                        mDatas.remove(clickBean);   //实时刷新，移除集合当中的对象
+                        adapter.notifyDataSetChanged();   //提示适配器更新数据
+                        setTopTvShow();   //改变头布局TextView显示的内容
+                    }
+                });
+        builder.create().show();   //显示对话框
     }
 
 

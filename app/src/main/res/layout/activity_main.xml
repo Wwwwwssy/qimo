@@ -51,7 +51,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="15dp"
-        android:background="@color/yellow"
+        android:background="@drawable/test"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/设置" />
     <ImageButton
@@ -62,7 +62,7 @@
         android:layout_toLeftOf="@id/main_btn_my"
         android:layout_alignBottom="@id/main_btn_my"
         android:layout_marginLeft="15dp"
-        android:background="@color/yellow"
+        android:background="@drawable/test"
         android:layout_toStartOf="@id/main_btn_my"
         android:layout_marginStart="15dp"
         android:contentDescription="@string/jizhang" />
@@ -74,7 +74,7 @@
         android:layout_toLeftOf="@id/main_btn_edit"
         android:layout_alignBottom="@id/main_btn_my"
         android:layout_marginLeft="15dp"
-        android:background="@color/yellow"
+        android:background="@drawable/test"
         android:layout_toStartOf="@id/main_btn_edit"
         android:layout_marginStart="15dp"
         android:contentDescription="@string/mingixi" />

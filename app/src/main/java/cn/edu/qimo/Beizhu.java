@@ -14,7 +14,7 @@ public class Beizhu extends Dialog implements View.OnClickListener{
     EditText editText1;
     Button cancelBtn,ensureBtn;
     OnEnsureListener onEnsureListener;//初始化接口对象
-    // 设定回调接口的方法
+    // 设定回调接口的方法(支出和收入引用)
     public void setOnEnsureListener(OnEnsureListener onEnsureListener) {
         this.onEnsureListener = onEnsureListener;
     }

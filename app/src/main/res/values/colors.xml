@@ -10,7 +10,9 @@
     <color name="white">#ffffff</color>
     <color name="green_006400">#006400</color>
     <color name="pink2">#E4E84D99</color>
+    <color name="pink3">#DDEF6896</color>
     <color name="pink">#A8E91E63</color>
     <color name="yellow">#D7FBA21F</color>
     <color name="yellow2">#DADCB43C</color>
+    <color name="yellow3">#E1B101</color>
 </resources>

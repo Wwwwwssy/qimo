@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@color/yellow2">
+    <TextView
+        android:id="@+id/budget_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/设置预算"
+        android:layout_centerHorizontal="true"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/budget_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥"
+        android:layout_below="@id/budget_tv1"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+    <EditText
+        android:id="@+id/budget_et"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/budget_tv2"
+        android:layout_alignBaseline="@id/budget_tv2"
+        android:inputType="numberDecimal"
+        android:background="@color/yellow">
+        <requestFocus/>
+    </EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/budget_et"
+        android:padding="10dp">
+        <Button
+            android:id="@+id/budget_btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/取消"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@color/yellow3"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp" />
+        <Button
+            android:id="@+id/budget_btn_ensure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/确定"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:background="@color/yellow3"
+            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp" />
+    </LinearLayout>
+</RelativeLayout>

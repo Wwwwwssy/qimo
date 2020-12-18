@@ -48,10 +48,11 @@ public class DBManager {
         values.put("day",bean.getDay());
         values.put("kind",bean.getKind());
         db.insert("confirmtb",null,values);
-        Log.i("confirmtb","insertItemToComfirmt is ok");
+        Log.i("confirmtb","insertItemToConfirmtb is ok");
     }
+
     //获取记账表中某一天的收支
-    public static List<ConfirmBean>getListOneDayFromComfirmtb(int year,int month,int day){
+    public static List<ConfirmBean>getListOneDayFromConfirmtb(int year,int month,int day){
         List<ConfirmBean>list = new ArrayList<>();
         //读取confirmtb中的数据
         String sql = "select * from confirmtb where year=? and month=? and day=? order by id desc";
@@ -73,6 +74,30 @@ public class DBManager {
         }
         return list;
     }
+    //获取记账表中某月的收支
+    public static List<ConfirmBean>getListOneMonthFromConfirmtb(int year,int month){
+        List<ConfirmBean>list = new ArrayList<>();
+        //读取confirmtb中的数据
+        String sql = "select * from confirmtb where year=? and month=? order by id desc";
+        Cursor cursor = db.rawQuery(sql, new String[]{year + "", month + ""});
+        //遍历符合要求的每一行数据
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            int year1 = cursor.getInt(cursor.getColumnIndex("year"));
+            int month1 = cursor.getInt(cursor.getColumnIndex("month"));
+            int day1 = cursor.getInt(cursor.getColumnIndex("day"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            ConfirmBean confirmBean = new ConfirmBean(id, typename, sImageId, beizhu, money,time,year1,month1,day1, kind);
+            list.add(confirmBean);
+        }
+        return list;
+    }
+
     //获取某一天的支出或者收入的总金额   kind：支出==0    收入===1
     public static float getSumMoneyOneDay(int year,int month,int day,int kind){
         float total = 0.0f;
@@ -100,7 +125,7 @@ public class DBManager {
     //获取某一年的支出或者收入的总金额   kind：支出==0    收入===1
     public static float getSumMoneyOneYear(int year,int kind){
         float total = 0.0f;
-        String sql = "select sum(money) from accounttb where year=? and kind=?";
+        String sql = "select sum(money) from confirmtb where year=? and kind=?";
         Cursor cursor = db.rawQuery(sql, new String[]{year + "", kind + ""});
         // 遍历
         if (cursor.moveToFirst()) {
@@ -109,4 +134,81 @@ public class DBManager {
         }
         return total;
     }
+
+    //根据传入的id，删除confirmtb表当中的一条数据
+    public static int deleteItemFromConfirmtbById(int id){
+        int i = db.delete("confirmtb", "id=?", new String[]{id + ""});
+        return i;
+    }
+    // 删除Confirmtb表格当中的所有数据
+    public static void deleteAllConfirmtb(){
+        String sql = "delete from confirmtb";
+        db.execSQL(sql);
+    }
+
+    //根据备注搜索收入或者支出的情况列表
+    public static List<ConfirmBean>getListFromConfirmtbBybeizhu(String beizhu){
+        List<ConfirmBean>list = new ArrayList<>();
+        String sql = "select * from confirmtb where beizhu like '%"+beizhu+"%'";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            String bz = cursor.getString(cursor.getColumnIndex("beizhu"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            int year = cursor.getInt(cursor.getColumnIndex("year"));
+            int month = cursor.getInt(cursor.getColumnIndex("month"));
+            int day = cursor.getInt(cursor.getColumnIndex("day"));
+            ConfirmBean confirmBean = new ConfirmBean(id, typename, sImageId, bz, money, time, year, month, day, kind);
+            list.add(confirmBean);
+        }
+        return list;
+    }
+    //根据时间搜索收入或者支出的情况列表
+    public static List<ConfirmBean>getListFromConfirmtbBytime(String time){
+        List<ConfirmBean>list = new ArrayList<>();
+        String sql = "select * from confirmtb where time like '%"+time+"%'";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            String bz = cursor.getString(cursor.getColumnIndex("beizhu"));
+            String time1 = cursor.getString(cursor.getColumnIndex("time"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            int year = cursor.getInt(cursor.getColumnIndex("year"));
+            int month = cursor.getInt(cursor.getColumnIndex("month"));
+            int day = cursor.getInt(cursor.getColumnIndex("day"));
+            ConfirmBean confirmBean = new ConfirmBean(id, typename, sImageId, bz, money, time1, year, month, day, kind);
+            list.add(confirmBean);
+        }
+        return list;
+    }
+    //根据类型搜索收入或者支出的情况列表
+    public static List<ConfirmBean>getListFromConfirmtbBytypename(String typename){
+        List<ConfirmBean>list = new ArrayList<>();
+        String sql = "select * from confirmtb where typename like '%"+typename+"%'";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename1 = cursor.getString(cursor.getColumnIndex("typename"));
+            String bz = cursor.getString(cursor.getColumnIndex("beizhu"));
+            String time1 = cursor.getString(cursor.getColumnIndex("time"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            int year = cursor.getInt(cursor.getColumnIndex("year"));
+            int month = cursor.getInt(cursor.getColumnIndex("month"));
+            int day = cursor.getInt(cursor.getColumnIndex("day"));
+            ConfirmBean confirmBean = new ConfirmBean(id, typename1, sImageId, bz, money, time1, year, month, day, kind);
+            list.add(confirmBean);
+        }
+        return list;
+    }
+
+
 }

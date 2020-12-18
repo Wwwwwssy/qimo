@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.List;
 import cn.edu.qimo.db.ConfirmBean;
 
+//每一条支出后收入的适配器
 public class MainJizhangAdapter extends BaseAdapter {
     Context context;
     List<ConfirmBean> mDatas;
