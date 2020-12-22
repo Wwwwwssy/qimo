@@ -97,6 +97,28 @@ public class DBManager {
         }
         return list;
     }
+    public static List<ConfirmBean>getListOneYearFromConfirmtb(int year){
+        List<ConfirmBean>list = new ArrayList<>();
+        //读取confirmtb中的数据
+        String sql = "select * from confirmtb where year=? order by id desc";
+        Cursor cursor = db.rawQuery(sql, new String[]{year + ""});
+        //遍历符合要求的每一行数据
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("id"));
+            String typename = cursor.getString(cursor.getColumnIndex("typename"));
+            int sImageId = cursor.getInt(cursor.getColumnIndex("sImageId"));
+            String beizhu = cursor.getString(cursor.getColumnIndex("beizhu"));
+            float money = cursor.getFloat(cursor.getColumnIndex("money"));
+            String time = cursor.getString(cursor.getColumnIndex("time"));
+            int year1 = cursor.getInt(cursor.getColumnIndex("year"));
+            int month1 = cursor.getInt(cursor.getColumnIndex("month"));
+            int day1 = cursor.getInt(cursor.getColumnIndex("day"));
+            int kind = cursor.getInt(cursor.getColumnIndex("kind"));
+            ConfirmBean confirmBean = new ConfirmBean(id, typename, sImageId, beizhu, money,time,year1,month1,day1, kind);
+            list.add(confirmBean);
+        }
+        return list;
+    }
 
     //获取某一天的支出或者收入的总金额   kind：支出==0    收入===1
     public static float getSumMoneyOneDay(int year,int month,int day,int kind){

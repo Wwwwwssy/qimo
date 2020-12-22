@@ -9,6 +9,8 @@ import androidx.annotation.Nullable;
 import cn.edu.qimo.R;
 
 public class DBOpenHelper extends SQLiteOpenHelper {
+    private SQLiteDatabase db;
+
     public DBOpenHelper(@Nullable Context context) {
         super(context, "jizhang.db", null, 1);
     }
@@ -21,11 +23,16 @@ public class DBOpenHelper extends SQLiteOpenHelper {
         //插入
         insertType(db);
         //创建记账页面的表 ConfirmBean 中的类型
-        sql = "create table confirmtb(id integer primary key autoincrement,typename varchar(10),sImageId integer,beizhu varchar(80),money float," +
-                "time varchar(60),year integer,month integer,day integer,kind integer)";
+        sql = "create table confirmtb(id integer primary key autoincrement,typename varchar(10),sImageId integer,beizhu varchar(80),money float," + "time varchar(60),year integer,month integer,day integer,kind integer)";
         db.execSQL(sql);
 
+
+
     }
+
+
+
+
 
     private void insertType(SQLiteDatabase db) {
         String sql = "insert into typetb (typename,imageId,sImageId,kind) values (?,?,?,?)";

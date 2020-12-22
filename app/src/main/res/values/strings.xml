@@ -29,11 +29,16 @@
     <string name="请输入搜素内容">请输入搜索内容</string>
     <string name="重查">查询内容不存在，请重新查询</string>
     <string name="历史记录">历史记录</string>
-    <string name="_2020_12">2020年12月15日</string>
+    <string name="_2020_12">2020年12月28日</string>
     <string name="本月历史账单">本月历史账单</string>
     <string name="点击">点击</string>
     <string name="清空记录">清空记录</string>
     <string name="黄色">黄色</string>
     <string name="粉色">粉色</string>
     <string name="settingcolor">颜色选择</string>
+    <string name="年账单">年账单:1000元</string>
+    <string name="显示账单">显示账单</string>
+    <string name="个人中心">个人中心</string>
+    <string name="_182_5882">182****5882</string>
+    <string name="张三">张三</string>
 </resources>

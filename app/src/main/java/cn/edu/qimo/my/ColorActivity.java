@@ -33,6 +33,9 @@ public class ColorActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.settingcolor_iv_back:
+                finish();
+                break;
             case R.id.color_btn_yellow:
                 SettingColor1();
                 break;
@@ -51,8 +54,9 @@ public class ColorActivity extends AppCompatActivity {
         mingxiBt.setBackgroundColor(getResources().getColor(R.color.pink));
         myBt.setBackgroundColor(getResources().getColor(R.color.pink));
         jizhangBt.setBackgroundColor(getResources().getColor(R.color.pink));
-//        mainrelativeLayout1.setBackgroundColor(getResources().getColor(R.color.pink));
-//        mainrelativeLayout2.setBackgroundColor(getResources().getColor(R.color.pink2));
+        mainrelativeLayout1.setBackgroundColor(getResources().getColor(R.color.pink));
+        mainrelativeLayout2.setBackgroundColor(getResources().getColor(R.color.pink2));
+
     }
 
 

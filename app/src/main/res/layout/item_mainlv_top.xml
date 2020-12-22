@@ -92,16 +92,7 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:layout_toEndOf="@id/item_mainlv_top_tv_in" />
-        <TextView
-            android:id="@+id/item_mainlv_top_tv4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@mipmap/search"
-            android:layout_toRightOf="@id/item_mainlv_top_tv_riqi"
-            android:layout_centerHorizontal="true"
-            android:text="@string/图表分析"
-            android:textColor="@color/black"
-            android:drawablePadding="10dp" />
+
 
 
 

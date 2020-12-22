@@ -10,13 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".my.ColorActivity"></activity>
+        <!-- <activity android:name=".load.loadActivity"/> -->
+        <activity android:name=".my.ZhangdanActivity" />
+        <activity android:name=".my.ColorActivity" />
         <activity android:name=".my.SettingActivity" />
         <activity android:name=".my.HistoryActivity" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".my.MyActivity" />
         <activity android:name=".jizhangfg.JizhangActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".load.loadActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -45,9 +45,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/user_line"
-                android:text="182****5882"
+                android:text="@string/_182_5882"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_marginStart="15dp"
+                android:layout_toEndOf="@id/user_line" />
 
             <TextView
                 android:id="@+id/user_name"
@@ -55,9 +57,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_toLeftOf="@id/user_line"
-                android:text="张三"
+                android:text="@string/张三"
                 android:textColor="@color/white"
-                android:textSize="17sp" />
+                android:textSize="17sp"
+                android:layout_marginEnd="30dp"
+                android:layout_toStartOf="@id/user_line" />
 
             <ImageView
                 android:id="@+id/user_line"
@@ -104,9 +108,9 @@
         <cn.edu.qimo.my.nav_bar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/my_version"
+            android:id="@+id/my_zhangdan"
             my:icon="@mipmap/product_info_icon"
-            my:hint="版本更新"
+            my:hint="年账单"
             android:background="@color/yellow2"
             android:onClick="onClick"
             >
@@ -116,7 +120,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/my_about"
             my:icon="@mipmap/my_reward_manage"
-            my:hint="关于"
+            my:hint="敬请期待"
             android:background="@color/yellow2"
             android:onClick="onClick"
             >

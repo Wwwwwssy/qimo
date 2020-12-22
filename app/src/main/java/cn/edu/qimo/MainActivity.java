@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private final String TAG = "JizhangActivity";
     ListView todayLv;  //展示今日收支情况的ListView
     ImageView searchIv;//搜索
+    TextView timeTv1;
     ImageButton editBtn,moreBtn;//个人中心
     List<ConfirmBean> mDatas;//声明数据源
     MainJizhangAdapter adapter;//声明适配器
@@ -125,6 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editBtn = findViewById(R.id.main_btn_edit);
         moreBtn = findViewById(R.id.main_btn_my);
         searchIv = findViewById(R.id.main_iv_search);
+        timeTv1 = findViewById(R.id.item_mainlv_top_tv_riqi);
         editBtn.setOnClickListener(this);
         moreBtn.setOnClickListener(this);
         searchIv.setOnClickListener(this);
@@ -134,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         year = calendar.get(Calendar.YEAR);
         month = calendar.get(Calendar.MONTH)+1;
         day = calendar.get(Calendar.DAY_OF_MONTH);
+
     }
 
 
@@ -163,6 +166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.item_mainlv_top_iv_hide:
                 toggleShow();//隐藏或者显示
                 break;
+
 
 //            if (v == headerView) {
 //                //头布局被点击了
@@ -227,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
+    //删除界面
     private void showDeleteItemDialog(final  ConfirmBean clickBean) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示信息").setMessage("是否删除这条记录？")

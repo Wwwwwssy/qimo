@@ -11,40 +11,52 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/yellow">
-        <TextView
+        <ImageView
+            android:id="@+id/zhangdan_iv_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/app_name"
+            android:src="@mipmap/it_back"
+            android:layout_marginLeft="10dp"
+            android:onClick="onClick"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/返回"
+            />
+
+        <Button
+            android:id="@+id/zhangdan_bt"
+            android:background="@color/yellow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/zhangdan_tv_money"
+            android:text="@string/显示账单"
+            android:onClick="onClick"/>
+
+        <TextView
+            android:id="@+id/zhangdan_tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="@string/年账单"
             android:gravity="center"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_centerInParent="true"
             android:textSize="20sp"
             tools:ignore="RelativeOverlap"/>
         <!--    tools:ignore="RelativeOverlap"确定长度不会被覆盖        -->
-        <ImageView
-            android:id="@+id/main_iv_search"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@mipmap/search"
-            android:layout_alignParentRight="true"
-            android:padding="10dp"
-            android:layout_alignParentEnd="true"
-            android:contentDescription="@string/search" />
+
 
     </RelativeLayout>
 
     <ListView
-        android:id="@+id/main_lv"
+        android:id="@+id/zhangdan_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/main_top_layout"
         android:divider="@null"
         android:dividerHeight="6dp"
         android:background="@color/grey_f3f3f3"/>
-
     <ImageButton
-        android:id="@+id/main_btn_my"
+        android:id="@+id/zhangdan_bt1"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:src="@drawable/my"
@@ -54,35 +66,5 @@
         android:background="@drawable/test"
         android:layout_alignParentEnd="true"
         android:contentDescription="@string/个人中心" />
-    <ImageButton
-        android:id="@+id/main_btn_edit"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/jizhang"
-        android:layout_toLeftOf="@id/main_btn_my"
-        android:layout_alignBottom="@id/main_btn_my"
-        android:layout_marginLeft="15dp"
-        android:background="@drawable/test"
-        android:layout_toStartOf="@id/main_btn_my"
-        android:layout_marginStart="15dp"
-        android:contentDescription="@string/jizhang" />
-    <ImageButton
-        android:id="@+id/mingxi"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:src="@drawable/mingxi"
-        android:layout_toLeftOf="@id/main_btn_edit"
-        android:layout_alignBottom="@id/main_btn_my"
-        android:layout_marginLeft="15dp"
-        android:background="@drawable/test"
-        android:layout_toStartOf="@id/main_btn_edit"
-        android:layout_marginStart="15dp"
-        android:contentDescription="@string/mingixi" />
-
-
-
-
-
-
 
 </RelativeLayout>

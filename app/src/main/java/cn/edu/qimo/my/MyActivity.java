@@ -64,9 +64,10 @@ public class MyActivity extends AppCompatActivity implements View.OnClickListene
                 Intent intent2 = new Intent(this,SettingActivity.class);//历史界面
                 startActivity(intent2);
                 break;
-//            case R.id.version:
-//                Toast.makeText(this, "v", Toast.LENGTH_SHORT).show();
-//                break;
+            case R.id.my_zhangdan:
+                Intent intent3 = new Intent(this,ZhangdanActivity.class);//年账单界面
+                startActivity(intent3);
+                break;
 //            case R.id.about:
 //                Toast.makeText(this, "about", Toast.LENGTH_SHORT).show();
 //                Intent intent = new Intent(this, AboutActivity.class);//关于页面（主页面）

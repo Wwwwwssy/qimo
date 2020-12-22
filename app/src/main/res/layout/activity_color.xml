@@ -12,12 +12,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
         <ImageView
-            android:id="@+id/setting_iv_back"
+            android:id="@+id/settingcolor_iv_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:src="@mipmap/it_back"
             android:layout_marginLeft="10dp"
-            android:onClick="onClick"/>
+            android:onClick="onClick"
+            android:layout_marginStart="10dp"
+            android:contentDescription="@string/返回" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
